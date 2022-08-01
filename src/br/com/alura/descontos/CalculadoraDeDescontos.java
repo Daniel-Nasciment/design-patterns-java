@@ -7,7 +7,14 @@ import br.com.alura.orcamento.Orcamento;
 public class CalculadoraDeDescontos {
 
 	public BigDecimal calcular(Orcamento orcamento) {
-		return null;
+		// DESSA FORMA VAMOS ENCADEANDO AS CHAMADAS DAS CLASSES QUE REPRESENTAM CADA
+		// FORMA DE DESCONTO
+		Desconto desconto = 
+				new DescontoParaOrcamentoComMaisDeCincoItens(
+						new DescontoParaOrcamentoComValorMaiorDeQuinhentos(
+								new SemDesconto()));
+
+		return desconto.calcular(orcamento);
 	}
-	
+
 }
