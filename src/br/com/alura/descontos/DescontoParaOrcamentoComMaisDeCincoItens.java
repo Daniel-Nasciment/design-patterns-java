@@ -10,16 +10,15 @@ public class DescontoParaOrcamentoComMaisDeCincoItens extends Desconto {
 		super(proximo);
 	}
 
-	public BigDecimal calcular(Orcamento orcamento) {
+	public BigDecimal efetuarCalculo(Orcamento orcamento) {
 		
-		if(orcamento.getQuantidade() > 5) {
-			return orcamento.getValor().multiply(new BigDecimal("0.1"));
-		}
+		return orcamento.getValor().multiply(new BigDecimal("0.1"));
 		
-		// DESSA FORMA EU VOU ENCADEANDO TODOS OS DESCONTOS ATÉ UM DELES SEREM APLICADOS
-		// OU SEJA, SE A REGRA DO IF ACIMA NAO FOR APLICADA, ELE VAI ENCADEAR OUTRA CLASSE FILHA DE "Desconto"
-		// PARA IR VALIDANDO SE O DESCONTO JA FOI APLICADO
-		return proximo.calcular(orcamento);
+	}
+
+	@Override
+	public boolean regraAplicarDesconto(Orcamento orcamento) {
+		return orcamento.getQuantidade() > 5;
 	}
 	
 }

@@ -9,12 +9,12 @@ public class CalculadoraDeDescontos {
 	public BigDecimal calcular(Orcamento orcamento) {
 		// DESSA FORMA VAMOS ENCADEANDO AS CHAMADAS DAS CLASSES QUE REPRESENTAM CADA
 		// FORMA DE DESCONTO
-		Desconto desconto = 
+		Desconto cadeiaDescontos = 
 				new DescontoParaOrcamentoComMaisDeCincoItens(
 						new DescontoParaOrcamentoComValorMaiorDeQuinhentos(
 								new SemDesconto()));
 
-		return desconto.calcular(orcamento);
+		return cadeiaDescontos.calcular(orcamento);
 	}
 
 }
