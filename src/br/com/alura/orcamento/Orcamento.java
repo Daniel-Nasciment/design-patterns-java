@@ -3,6 +3,7 @@ package br.com.alura.orcamento;
 import java.math.BigDecimal;
 
 import br.com.alura.orcamento.situacao.EmAnalise;
+import br.com.alura.orcamento.situacao.Finalizado;
 import br.com.alura.orcamento.situacao.SituacaoOrcamento;
 
 public class Orcamento {
@@ -65,6 +66,10 @@ public class Orcamento {
 
 		this.valor.subtract(valorDescontoExtra);
 
+	}
+
+	public boolean isFInalizado() {
+		return situacao instanceof Finalizado;
 	}
 
 }
