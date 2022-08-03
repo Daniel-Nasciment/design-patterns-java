@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 
 import br.com.alura.orcamento.Orcamento;
 
-public class ICMS implements Imposto{
+public class ICMS extends Imposto{
 
-	// O IMPOSTO DEVE SER CAPAZ DE SE CALCULAR
-	
+	public ICMS(Imposto outroImposto) {
+		super(outroImposto);
+	}
+
 	@Override
-	public BigDecimal calcular(Orcamento orcamento) {
+	protected BigDecimal realizarCalculo(Orcamento orcamento) {
 		return orcamento.getValor().multiply(new BigDecimal("0.1"));
 	}
 
