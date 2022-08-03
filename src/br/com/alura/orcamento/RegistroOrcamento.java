@@ -1,5 +1,6 @@
 package br.com.alura.orcamento;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class RegistroOrcamento {
@@ -23,11 +24,12 @@ public class RegistroOrcamento {
 		
 		String url = "http://api.externa/orcamento";
 
-		Map<String, Object> dados = Map.of(
-				"valor", orcamento.getValor(),
-				"quantidadeItens", orcamento.getQuantidade()
-				);
+		Map<String, Object> dados = new HashMap<>();
 		
+		orcamento.getItem().forEach(i -> {
+			dados.put("valor", i.getValor());
+			dados.put("quantidade", i.getQuantidade());
+		});
 		
 		http.post(url, dados);
 

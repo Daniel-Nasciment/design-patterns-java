@@ -1,7 +1,10 @@
 package br.com.alura.orcamento;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import br.com.alura.imposto.ItemOrcamento;
 import br.com.alura.orcamento.situacao.EmAnalise;
 import br.com.alura.orcamento.situacao.Finalizado;
 import br.com.alura.orcamento.situacao.SituacaoOrcamento;
@@ -10,32 +13,19 @@ public class Orcamento {
 
 	private BigDecimal valor;
 
-	private int quantidade;
-
 	// CLASSE QUE REPRESENTA A SITUAÇÃO
 	private SituacaoOrcamento situacao;
 
+	private List<ItemOrcamento> item;
+
 	public Orcamento() {
+		this.valor = BigDecimal.ZERO;
 		this.situacao = new EmAnalise();
-	}
-
-	public Orcamento(BigDecimal valor) {
-		this.valor = valor;
-		this.situacao = new EmAnalise();
-	}
-
-	public Orcamento(BigDecimal valor, int quantidade) {
-		this.valor = valor;
-		this.quantidade = quantidade;
-		this.situacao = new EmAnalise();
+		this.item = new ArrayList<>();
 	}
 
 	public BigDecimal getValor() {
 		return valor;
-	}
-
-	public int getQuantidade() {
-		return quantidade;
 	}
 
 	public SituacaoOrcamento getSituacao() {
@@ -59,6 +49,14 @@ public class Orcamento {
 		this.situacao = situacao;
 	}
 
+	public List<ItemOrcamento> getItem() {
+		return item;
+	}
+
+	public void setItem(List<ItemOrcamento> item) {
+		this.item = item;
+	}
+
 	// A PROPRIA SITUACAO VAI ME RETORNAR O DESCONTO EXTRA (SE TIVER)
 	public void aplicarDescontoExtra() {
 
@@ -70,6 +68,11 @@ public class Orcamento {
 
 	public boolean isFInalizado() {
 		return situacao instanceof Finalizado;
+	}
+	
+	public void adicionarItem(ItemOrcamento item) {
+		this.valor = valor.add(item.getValor());
+		this.item.add(item);
 	}
 
 }
